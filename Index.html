@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Soumen Kundu | Researcher in Proteostasis & Cell Biology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #070b12;
+      --bg2:      #0b1220;
+      --surface:  #0f1a2e;
+      --surface2: #152032;
+      --border:   #1e3050;
+      --cyan:     #00d4c8;
+      --cyan-dim: #00897f;
+      --teal:     #0aecdf;
+      --gold:     #f5c842;
+      --muted:    #6b8aa8;
+      --text:     #dde8f2;
+      --text2:    #b0c8e0;
+      --white:    #eef4fb;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ─── BACKGROUND TEXTURE ─── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 0%, rgba(0,212,200,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 100%, rgba(245,200,66,0.04) 0%, transparent 60%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw;
+      background: rgba(7,11,18,0.75);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(30,48,80,0.6);
+    }
+    .nav-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--cyan);
+      letter-spacing: 0.02em;
+    }
+    .nav-links { display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+
+    /* ─── LAYOUT ─── */
+    main { position: relative; z-index: 1; padding-top: 60px; }
+    .container { max-width: 900px; margin: 0 auto; padding: 0 5vw; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: calc(100vh - 60px);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6rem 5vw;
+      max-width: 900px; margin: 0 auto;
+    }
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1.4rem;
+      opacity: 0; animation: fadeUp .7s .1s forwards;
+    }
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.0;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+      opacity: 0; animation: fadeUp .7s .25s forwards;
+    }
+    .hero-name em { color: var(--cyan); font-style: normal; }
+    .hero-title {
+      font-size: 1.1rem;
+      color: var(--muted);
+      font-weight: 300;
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp .7s .4s forwards;
+    }
+    .hero-desc {
+      max-width: 560px;
+      font-size: 0.95rem;
+      color: var(--text2);
+      line-height: 1.9;
+      border-left: 2px solid var(--cyan-dim);
+      padding-left: 1.2rem;
+      margin-bottom: 2.8rem;
+      opacity: 0; animation: fadeUp .7s .55s forwards;
+    }
+    .hero-contacts {
+      display: flex; flex-wrap: wrap; gap: 0.8rem;
+      opacity: 0; animation: fadeUp .7s .7s forwards;
+    }
+    .contact-chip {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.45rem 1rem;
+      border-radius: 100px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--text2);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .contact-chip:hover { border-color: var(--cyan); color: var(--cyan); }
+    .contact-chip svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+    }
+
+    /* ─── SECTION ─── */
+    section { padding: 5rem 0; }
+    .sec-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--cyan);
+      margin-bottom: 0.5rem;
+    }
+    .sec-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem; color: var(--white);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ─── RESEARCH ─── */
+    .research-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 640px) { .research-grid { grid-template-columns: 1fr; } }
+    .res-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.6rem;
+      transition: all 0.2s; position: relative; overflow: hidden;
+    }
+    .res-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(to right, var(--cyan-dim), transparent);
+    }
+    .res-card:hover { border-color: var(--cyan-dim); transform: translateY(-2px); }
+    .res-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; color: var(--cyan); margin-bottom: 0.8rem;
+    }
+    .res-text { font-size: 0.88rem; color: var(--text2); line-height: 1.75; }
+
+    /* ─── EDUCATION ─── */
+    .edu-timeline { position: relative; padding-left: 1.8rem; }
+    .edu-timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 0.5rem; bottom: 0;
+      width: 1px; background: linear-gradient(to bottom, var(--cyan-dim), transparent);
+    }
+    .edu-item { position: relative; margin-bottom: 2.5rem; }
+    .edu-item::before {
+      content: '';
+      position: absolute; left: -2.3rem; top: 0.4rem;
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--cyan); border: 2px solid var(--bg);
+      box-shadow: 0 0 8px rgba(0,212,200,0.5);
+    }
+    .edu-dates {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; color: var(--cyan); margin-bottom: 0.3rem;
+      letter-spacing: 0.05em;
+    }
+    .edu-degree {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem; color: var(--white); margin-bottom: 0.2rem;
+    }
+    .edu-inst { font-size: 0.88rem; color: var(--muted); margin-bottom: 0.4rem; }
+    .edu-note { font-size: 0.82rem; color: var(--text2); font-style: italic; }
+
+    /* ─── PUBLICATIONS ─── */
+    .pub-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .pub-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.4rem 1.6rem;
+      transition: border-color 0.2s;
+    }
+    .pub-card:hover { border-color: var(--cyan-dim); }
+    .pub-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; color: var(--cyan); letter-spacing: 0.12em;
+      margin-bottom: 0.5rem;
+    }
+    .pub-title {
+      font-size: 0.92rem; color: var(--white);
+      font-weight: 500; line-height: 1.5; margin-bottom: 0.4rem;
+    }
+    .pub-authors { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.3rem; }
+    .pub-authors strong { color: var(--cyan); }
+    .pub-journal { font-size: 0.78rem; color: var(--text2); font-style: italic; }
+    .pub-link {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; color: var(--cyan-dim);
+      text-decoration: none; margin-top: 0.6rem;
+      transition: color 0.2s;
+    }
+    .pub-link:hover { color: var(--cyan); }
+    .badge {
+      display: inline-block;
+      background: rgba(245,200,66,0.12);
+      color: var(--gold);
+      border: 1px solid rgba(245,200,66,0.25);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.58rem; letter-spacing: 0.1em;
+      padding: 0.15rem 0.55rem; border-radius: 3px;
+      margin-left: 0.5rem; vertical-align: middle;
+    }
+
+    /* ─── SKILLS ─── */
+    .skills-section { display: flex; flex-direction: column; gap: 2rem; }
+    .skill-group-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+    .tags-wrap { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .tag {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.85rem;
+      border-radius: 4px;
+      font-size: 0.77rem; color: var(--text2);
+      transition: all 0.2s; cursor: default;
+    }
+    .tag:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ─── AWARDS ─── */
+    .awards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+    .award-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.4rem;
+      transition: all 0.2s; position: relative; overflow: hidden;
+    }
+    .award-card:hover { border-color: var(--gold); }
+    .award-card::after {
+      content: '★';
+      position: absolute; right: 1rem; top: 0.8rem;
+      font-size: 0.8rem; color: rgba(245,200,66,0.2);
+    }
+    .award-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; color: var(--gold); margin-bottom: 0.5rem;
+    }
+    .award-title { font-size: 0.9rem; color: var(--white); font-weight: 500; margin-bottom: 0.3rem; }
+    .award-body { font-size: 0.78rem; color: var(--muted); line-height: 1.6; }
+
+    /* ─── CONFERENCES ─── */
+    .conf-list { display: flex; flex-direction: column; gap: 1rem; }
+    .conf-item {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      padding: 1.1rem 1.3rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px; transition: border-color 0.2s;
+    }
+    .conf-item:hover { border-color: var(--cyan-dim); }
+    .conf-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem; color: var(--cyan);
+      flex-shrink: 0; padding-top: 0.1rem;
+    }
+    .conf-text { font-size: 0.85rem; color: var(--text2); line-height: 1.65; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 5vw;
+      display: flex; flex-wrap: wrap;
+      justify-content: space-between; align-items: center; gap: 1rem;
+      position: relative; z-index: 1;
+    }
+    .foot-brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem; color: var(--cyan);
+    }
+    .foot-note { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); }
+
+    /* ─── UTILS ─── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(18px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 0 1.2rem; }
+      .nav-links { display: none; }
+      .hero { padding: 4rem 1.2rem; }
+      .container { padding: 0 1.2rem; }
+      section { padding: 3.5rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Soumen Kundu</div>
+  <div class="nav-links">
+    <a href="#research">Research</a>
+    <a href="#education">Education</a>
+    <a href="#publications">Publications</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-label">PhD Researcher · CSIR-IGIB, New Delhi</div>
+    <h1 class="hero-name">Soumen<br><em>Kundu</em></h1>
+    <p class="hero-title">Biological Sciences · Proteostasis &amp; Cell Biology</p>
+    <p class="hero-desc">
+      Investigating how cells sense and respond to proteotoxic stress — with a focus on mitochondria-assisted degradation of misfolded cytosolic proteins in <em>Saccharomyces cerevisiae</em>. CSIR-Senior Research Fellow under Dr. Kausik Chakraborty at CSIR-IGIB.
+    </p>
+    <div class="hero-contacts">
+      <a href="mailto:soumenkundu143@gmail.com" class="contact-chip">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 4a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H2a2 2 0 01-2-2V4zm2-1a1 1 0 00-1 1v.217l7 4.2 7-4.2V4a1 1 0 00-1-1H2zm13 2.383l-5.235 3.14L15 11.82V5.383zm-.354 7.894L9.878 9.97 8 11.124 6.122 9.97l-4.768 3.307A1 1 0 002 14h12a1 1 0 00.646-.723zM1 11.82l5.235-2.297L1 5.383V11.82z"/></svg>
+        soumenkundu143@gmail.com
+      </a>
+      <a href="https://linkedin.com/in/soumen-kundu-421410184" target="_blank" class="contact-chip">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 01.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://orcid.org/0000-0002-9912-8906" target="_blank" class="contact-chip">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm-1.95 4.5h1.3c.3 0 .55.25.55.55v1.3c0 .3-.25.55-.55.55h-1.3a.55.55 0 01-.55-.55V5.05c0-.3.25-.55.55-.55zm1.25 4.5v8.5h-1.3V9h1.3zm4.6 0c2.45 0 3.65 1.8 3.65 4.25S18.35 17.5 15.9 17.5H13.5V9h2.4zm-1.1 7.3h1c1.7 0 2.45-1.1 2.45-3.05S17.5 10.2 15.8 10.2h-1v6.1z"/></svg>
+        ORCID
+      </a>
+      <a href="tel:+919002347940" class="contact-chip">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M3.654 1.328a.678.678 0 00-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 004.168 6.608 17.569 17.569 0 006.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 00-.063-1.015l-2.307-1.794a.678.678 0 00-.58-.122l-2.19.547a1.745 1.745 0 01-1.657-.459L5.482 8.062a1.745 1.745 0 01-.46-1.657l.548-2.19a.678.678 0 00-.122-.58L3.654 1.328z"/></svg>
+        +91-9002347940
+      </a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="container">
+      <div class="sec-label">Current Research</div>
+      <h2 class="sec-title">Proteostasis in Eukaryotes</h2>
+      <div class="research-grid">
+        <div class="res-card">
+          <div class="res-num">01 / FOCUS</div>
+          <p class="res-text">Investigating mitochondrial-associated degradation (MAD) mechanisms governing clearance of cytosolic misfolded proteins in <em>Saccharomyces cerevisiae</em>.</p>
+        </div>
+        <div class="res-card">
+          <div class="res-num">02 / KEY FINDING</div>
+          <p class="res-text">Discovered increased ubiquitinated protein accumulation on the mitochondrial outer membrane during global misfolding stress conditions.</p>
+        </div>
+        <div class="res-card">
+          <div class="res-num">03 / PROTEIN TARGET</div>
+          <p class="res-text">Elucidating the role of <strong>TOM70</strong> in sensing and eliminating global misfolding stress at the mitochondrial surface.</p>
+        </div>
+        <div class="res-card">
+          <div class="res-num">04 / METHODOLOGY</div>
+          <p class="res-text">Generated and screened a random mutant library of a model cytosolic protein to capture degradation-prone misfolded intermediates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="container">
+      <div class="sec-label">Academic Background</div>
+      <h2 class="sec-title">Education</h2>
+      <div class="edu-timeline">
+
+        <div class="edu-item">
+          <div class="edu-dates">Aug 2021 – Present</div>
+          <div class="edu-degree">Ph.D. Biological Sciences</div>
+          <div class="edu-inst">CSIR-Institute of Genomics and Integrative Biology (AcSIR), New Delhi</div>
+          <div class="edu-note">CSIR-Senior Research Fellow · Supervisor: Dr. Kausik Chakraborty, Chief Scientist</div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-dates">Aug 2019 – July 2021</div>
+          <div class="edu-degree">M.Sc. Zoology (Genetics &amp; Molecular Biology)</div>
+          <div class="edu-inst">Visva Bharati University (VBU), West Bengal</div>
+          <div class="edu-note">CGPA: 8.08 / 10 (Grade: A++) · Dissertation: Role of miRNAs in cancers and drug delivery, under Dr. Sutapa Mukherjee</div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-dates">July 2016 – Aug 2019</div>
+          <div class="edu-degree">B.Sc. (Hons) Zoology — 1st Class</div>
+          <div class="edu-inst">Jagannath Kishore College, Sidho Kanho Birsha University, West Bengal</div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-dates">July 2013 – May 2015</div>
+          <div class="edu-degree">Higher Secondary (12th) — Physics, Chemistry, Biology</div>
+          <div class="edu-inst">Bankura Banga Vidyalaya, WBCHSE, West Bengal</div>
+          <div class="edu-note">Grade: A+</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- AWARDS -->
+  <section id="awards">
+    <div class="container">
+      <div class="sec-label">Honours &amp; Fellowships</div>
+      <h2 class="sec-title">Scholarships &amp; Awards</h2>
+      <div class="awards-grid">
+
+        <div class="award-card">
+          <div class="award-year">2023–2026</div>
+          <div class="award-title">Senior Research Fellowship (SRF-NET)</div>
+          <div class="award-body">Council of Scientific &amp; Industrial Research, Government of India</div>
+        </div>
+
+        <div class="award-card">
+          <div class="award-year">2021–2023</div>
+          <div class="award-title">Junior Research Fellowship (JRF-NET)</div>
+          <div class="award-body">Council of Scientific &amp; Industrial Research, Government of India</div>
+        </div>
+
+        <div class="award-card">
+          <div class="award-year">2021</div>
+          <div class="award-title">CSIR-NET JRF — AIR 183</div>
+          <div class="award-body">Qualified CSIR National Eligibility Test with All India Rank 183</div>
+        </div>
+
+        <div class="award-card">
+          <div class="award-year">2021</div>
+          <div class="award-title">GATE-XL (Life Sciences) — AIR 562</div>
+          <div class="award-body">Qualified Graduate Aptitude Test in Engineering (Life Sciences)</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="container">
+      <div class="sec-label">Scholarly Work</div>
+      <h2 class="sec-title">Publications</h2>
+      <div class="pub-list">
+
+        <div class="pub-card">
+          <div class="pub-year">2024 · PREPRINT</div>
+          <div class="pub-title">Fitness defects due to cytosolic protein misfolding in <em>S. cerevisiae</em> can be alleviated by decreasing mitochondrial protein import capacity <span class="badge">bioRxiv</span></div>
+          <div class="pub-authors">Zaidi Z., Dash D., Sharma A., <strong>Kundu S.</strong>, Bhatt S., Rao S., Padia K., Rai M., &amp; Chakraborty K.</div>
+          <div class="pub-journal">bioRxiv (Preprint)</div>
+          <a href="https://doi.org/10.1101/2024.08.26.609637" target="_blank" class="pub-link">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8.636 3.5a.5.5 0 00-.5-.5H1.5A1.5 1.5 0 000 4.5v10A1.5 1.5 0 001.5 16h10a1.5 1.5 0 001.5-1.5V7.864a.5.5 0 00-1 0V14.5a.5.5 0 01-.5.5h-10a.5.5 0 01-.5-.5v-10a.5.5 0 01.5-.5h6.636a.5.5 0 00.5-.5z"/><path d="M16 .5a.5.5 0 00-.5-.5h-5a.5.5 0 000 1h3.793L6.146 9.146a.5.5 0 10.708.708L15 1.707V5.5a.5.5 0 001 0v-5z"/></svg>
+            doi:10.1101/2024.08.26.609637
+          </a>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-year">2024 · BOOK CHAPTER</div>
+          <div class="pub-title">Multimodal Spectroscopy-Based Proteomics and Metabolomics Approach to Explore Actinomycetes</div>
+          <div class="pub-authors">A R A., Lohani V., <strong>Kundu S.</strong>, Akhter M.Q., Upmanyu B., &amp; Bag S.</div>
+          <div class="pub-journal">In: Protocols of Actinomycetes: Microbiology to Gene Editing. CRC Press. pp. 215–229.</div>
+          <a href="https://doi.org/10.1201/9781003398400" target="_blank" class="pub-link">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8.636 3.5a.5.5 0 00-.5-.5H1.5A1.5 1.5 0 000 4.5v10A1.5 1.5 0 001.5 16h10a1.5 1.5 0 001.5-1.5V7.864a.5.5 0 00-1 0V14.5a.5.5 0 01-.5.5h-10a.5.5 0 01-.5-.5v-10a.5.5 0 01.5-.5h6.636a.5.5 0 00.5-.5z"/><path d="M16 .5a.5.5 0 00-.5-.5h-5a.5.5 0 000 1h3.793L6.146 9.146a.5.5 0 10.708.708L15 1.707V5.5a.5.5 0 001 0v-5z"/></svg>
+            doi:10.1201/9781003398400
+          </a>
+        </div>
+
+        <div class="pub-card">
+          <div class="pub-year">2023 · JOURNAL ARTICLE</div>
+          <div class="pub-title">Single-Cell Proteomics with Spatial Attributes: Tools and Techniques</div>
+          <div class="pub-authors">Lohani V., A R A., <strong>Kundu S.</strong>, Akhter M.Q., &amp; Bag S.</div>
+          <div class="pub-journal">ACS Omega, 8(20), 17499–17510.</div>
+          <a href="https://doi.org/10.1021/acsomega.3c00795" target="_blank" class="pub-link">
+            <svg width="10" height="10" viewBox="0 0 16 16" fill="currentColor"><path d="M8.636 3.5a.5.5 0 00-.5-.5H1.5A1.5 1.5 0 000 4.5v10A1.5 1.5 0 001.5 16h10a1.5 1.5 0 001.5-1.5V7.864a.5.5 0 00-1 0V14.5a.5.5 0 01-.5.5h-10a.5.5 0 01-.5-.5v-10a.5.5 0 01.5-.5h6.636a.5.5 0 00.5-.5z"/><path d="M16 .5a.5.5 0 00-.5-.5h-5a.5.5 0 000 1h3.793L6.146 9.146a.5.5 0 10.708.708L15 1.707V5.5a.5.5 0 001 0v-5z"/></svg>
+            doi:10.1021/acsomega.3c00795
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONFERENCES -->
+  <section id="conferences">
+    <div class="container">
+      <div class="sec-label">Academic Events</div>
+      <h2 class="sec-title">Conference Proceedings</h2>
+      <div class="conf-list">
+
+        <div class="conf-item">
+          <div class="conf-year">2025</div>
+          <div class="conf-text"><strong>EMBO Lecture Course</strong>: Structure, function, and quality control of proteins in cell organelles — CCMB, Hyderabad. <em>Poster: "Role of TOM70 in mitochondrial associated degradation of cytosolic misfolded proteins"</em></div>
+        </div>
+
+        <div class="conf-item">
+          <div class="conf-year">2025</div>
+          <div class="conf-text"><strong>EMBO Lecture Course</strong>: Post-transcriptional regulation in ageing and age-related diseases — SNU &amp; IIITD, New Delhi. <em>Poster: "Exploring the determinants of cytosolic mutant protein for mitochondria assisted degradation"</em></div>
+        </div>
+
+        <div class="conf-item">
+          <div class="conf-year">2025</div>
+          <div class="conf-text"><strong>International Symposium on Mitochondria, Cell Death and Human Diseases</strong>: Frontiers in Cancer Research — Jawaharlal Nehru University, New Delhi.</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="sec-label">Technical Expertise</div>
+      <h2 class="sec-title">Skills &amp; Techniques</h2>
+      <div class="skills-section">
+
+        <div>
+          <div class="skill-group-label">Proteomics &amp; Metabolomics</div>
+          <div class="tags-wrap">
+            <span class="tag">LC–MS (Targeted &amp; Untargeted)</span>
+            <span class="tag">Targeted Metabolomics</span>
+            <span class="tag">Protein Purification (Affinity)</span>
+            <span class="tag">Skyline</span>
+            <span class="tag">SeeMS</span>
+            <span class="tag">ProteinPilot</span>
+            <span class="tag">MetaboAnalyst</span>
+            <span class="tag">Digest</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="skill-group-label">Cellular &amp; Molecular Biology</div>
+          <div class="tags-wrap">
+            <span class="tag">Mitochondria Isolation (Yeast &amp; Cell Lines)</span>
+            <span class="tag">In vitro Mitochondrial Import Assay</span>
+            <span class="tag">PCR</span>
+            <span class="tag">SDS-PAGE &amp; Western Blot</span>
+            <span class="tag">Cloning</span>
+            <span class="tag">Cell Culture</span>
+            <span class="tag">Flow Cytometry (MACS &amp; FACS)</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="skill-group-label">Yeast &amp; Mutagenesis</div>
+          <div class="tags-wrap">
+            <span class="tag">Yeast Transformation</span>
+            <span class="tag">MIC &amp; Spot Dilution Assay</span>
+            <span class="tag">Competitive Fitness</span>
+            <span class="tag">Genome Integration</span>
+            <span class="tag">Random Mutagenesis</span>
+            <span class="tag">Mutant Library Generation</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="skill-group-label">Bioinformatics &amp; Imaging</div>
+          <div class="tags-wrap">
+            <span class="tag">R-Studio</span>
+            <span class="tag">BLAST</span>
+            <span class="tag">ClustalW</span>
+            <span class="tag">DAVID</span>
+            <span class="tag">Benchling</span>
+            <span class="tag">ImageJ</span>
+            <span class="tag">ImageQuant</span>
+            <span class="tag">Fluorolog / Tecan</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="sec-label">Get in Touch</div>
+      <h2 class="sec-title">Contact</h2>
+      <div style="display:flex; flex-wrap:wrap; gap:1rem; margin-top:0.5rem;">
+        <a href="mailto:soumenkundu143@gmail.com" class="contact-chip" style="border-radius:6px; padding:0.8rem 1.4rem;">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M0 4a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H2a2 2 0 01-2-2V4zm2-1a1 1 0 00-1 1v.217l7 4.2 7-4.2V4a1 1 0 00-1-1H2zm13 2.383l-5.235 3.14L15 11.82V5.383zm-.354 7.894L9.878 9.97 8 11.124 6.122 9.97l-4.768 3.307A1 1 0 002 14h12a1 1 0 00.646-.723zM1 11.82l5.235-2.297L1 5.383V11.82z"/></svg>
+          soumenkundu143@gmail.com
+        </a>
+        <a href="https://linkedin.com/in/soumen-kundu-421410184" target="_blank" class="contact-chip" style="border-radius:6px; padding:0.8rem 1.4rem;">
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 01.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/></svg>
+          LinkedIn Profile
+        </a>
+        <a href="https://orcid.org/0000-0002-9912-8906" target="_blank" class="contact-chip" style="border-radius:6px; padding:0.8rem 1.4rem;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm-1.95 4.5h1.3c.3 0 .55.25.55.55v1.3c0 .3-.25.55-.55.55h-1.3a.55.55 0 01-.55-.55V5.05c0-.3.25-.55.55-.55zm1.25 4.5v8.5h-1.3V9h1.3zm4.6 0c2.45 0 3.65 1.8 3.65 4.25S18.35 17.5 15.9 17.5H13.5V9h2.4zm-1.1 7.3h1c1.7 0 2.45-1.1 2.45-3.05S17.5 10.2 15.8 10.2h-1v6.1z"/></svg>
+          ORCID: 0000-0002-9912-8906
+        </a>
+      </div>
+      <p style="margin-top:2rem; font-size:0.85rem; color:var(--muted); max-width:480px; line-height:1.8;">
+        Based at <strong style="color:var(--text2)">CSIR-IGIB, New Delhi, 110025</strong>. Open to collaborations in proteostasis, yeast biology, and proteomics.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="foot-brand">Soumen Kundu</div>
+  <div class="foot-note">PhD Researcher · CSIR-IGIB, New Delhi · Updated Jan 2026</div>
+</footer>
+
+</body>
+</html>
